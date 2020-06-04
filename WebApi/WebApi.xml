@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebApi</name>
+    </assembly>
+    <members>
+        <member name="T:WebApi.Areas.SystemManage.Controllers.UserController">
+            <summary>
+            用户数据接口
+            </summary>
+        </member>
+        <member name="M:WebApi.Areas.SystemManage.Controllers.UserController.Get(System.Int32,System.Int32)">
+            <summary>
+            获取人员列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Areas.SystemManage.Controllers.UserController.Post(DataManage.Models.UserInfo)">
+            <summary>
+            新增用户
+            </summary>
+            <param name="ui"></param>
+        </member>
+        <member name="M:WebApi.Areas.SystemManage.Controllers.UserController.PUT(DataManage.Models.UserInfo)">
+            <summary>
+            修改用户
+            </summary>
+            <param name="ui"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Areas.SystemManage.Controllers.UserController.DELETE(System.Int32)">
+            <summary>
+            删除用户
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WebApi.ResponseMessage`1">
+            <summary>
+            返回对象
+            注意：请使用CreateResult.For()创建对象
+            </summary>
+        </member>
+        <member name="M:WebApi.ResponseMessage`1.#ctor">
+            <summary>
+            返回对象
+            注意：请使用CreateResult.For()创建对象
+            </summary>
+        </member>
+        <member name="M:WebApi.ResponseMessage`1.#ctor(`0,System.Int32,System.String)">
+            <summary>
+            返回对象
+            </summary>
+        </member>
+        <member name="M:WebApi.ResponseMessage`1.#ctor(System.String,System.String)">
+            <summary>
+            返回对象
+            </summary>
+        </member>
+        <member name="P:WebApi.ResponseMessage`1.Code">
+            <summary>
+            错误码
+            </summary>
+        </member>
+        <member name="P:WebApi.ResponseMessage`1.Success">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="P:WebApi.ResponseMessage`1.Message">
+            <summary>
+            返回消息
+            </summary>
+        </member>
+        <member name="P:WebApi.ResponseMessage`1.Total">
+            <summary>
+            返回数量
+            </summary>
+        </member>
+        <member name="P:WebApi.ResponseMessage`1.Body">
+            <summary>
+            返回对象
+            </summary>
+        </member>
+        <member name="T:WebApi.CreateResult">
+            <summary>
+            创建返回消息
+            </summary>
+        </member>
+        <member name="M:WebApi.Startup.AutoInjection(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            自动注入
+            </summary>
+            <param name="services"></param>
+        </member>
+    </members>
+</doc>
