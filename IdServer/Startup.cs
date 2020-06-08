@@ -32,16 +32,6 @@ namespace IdServer
 
             #region �䷢ƾ֤
             services.AddIdentityServer()
-                .AddConfigurationStore(ops =>
-                {
-                    ops.ConfigureDbContext = builder =>
-                    {
-                        builder.UseSqlServer(Configuration.GetConnectionString("bimcon"), sql =>
-                        {
-                            sql.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
-                        });
-                    };
-                })
                 .AddOperationalStore(options =>
                 {
                     options.ConfigureDbContext = builder =>
