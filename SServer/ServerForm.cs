@@ -44,19 +44,23 @@ namespace SServer
             };
             timer.Elapsed += Timer_Elapsed;
             timer.Start();
-            List<DataProcessor> pros = new List<DataProcessor>
-            {
-                DPSManager.GetDataProcessor<RijndaelPSKEncrypter>()
-            };
-            Dictionary<string, string> options = new Dictionary<string, string>
-            {
-                { "RijndaelPSKEncrypter_PASSWORD", "password" }
-            };
-            NetworkComms.DefaultSendReceiveOptions = new SendReceiveOptions(DPSManager.GetDataSerializer<JSONSerializer>(), pros, options);
+            //List<DataProcessor> pros = new List<DataProcessor>
+            //{
+            //    DPSManager.GetDataProcessor<RijndaelPSKEncrypter>()
+            //};
+            //Dictionary<string, string> options = new Dictionary<string, string>
+            //{
+            //    { "RijndaelPSKEncrypter_PASSWORD", "password" }
+            //};
+            //NetworkComms.DefaultSendReceiveOptions = new SendReceiveOptions(DPSManager.GetDataSerializer<JSONSerializer>(), null, null);
+
+            NetworkComms.DefaultSendReceiveOptions.DataProcessors.Add(DPSManager.GetDataProcessor<RijndaelPSKEncrypter>());
+            RijndaelPSKEncrypter.AddPasswordToOptions(NetworkComms.DefaultSendReceiveOptions.Options, "password");
         }
 
         private void ServerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            NetworkComms.Shutdown();
             timer.Stop();
             timer.Dispose();
             GC.Collect();

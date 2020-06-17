@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using sun.security.provider;
 using System.Security.Cryptography;
 using System.Xml;
+using System.Reflection;
 
 namespace AliPayment
 {
@@ -59,10 +60,12 @@ namespace AliPayment
             //            var node = doc.GetElementsByTagName("ehealthCardId")[0];
             //            Console.WriteLine(node.Value);
             //            Console.ReadLine();
-            var b = false;
-            var data= AnalyzeIDCard("12010119350307147X",out b);
-            Console.WriteLine(data);
-
+            ////var b = false;
+            ////var data= AnalyzeIDCard("12010119350307147X",out b);
+            ////Console.WriteLine(data);
+            ////var items = (typeof(HisPaymentMethodEnum)).GetMembers();
+            var n = PaymentsPluginAttribute.Get<HisPaymentMethodEnum>("Payments.ABCPay1");
+            Console.Read();
         }
 
 

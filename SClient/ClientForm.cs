@@ -34,6 +34,7 @@ namespace SClient
             Control.CheckForIllegalCrossThreadCalls = false;
             this.Load += Form1_Load;
             this.button1.Click += Button1_Click;
+            this.FormClosing += ClientForm_FormClosing;
             List<DataProcessor> pros = new List<DataProcessor>
             {
                 DPSManager.GetDataProcessor<RijndaelPSKEncrypter>()
@@ -42,7 +43,16 @@ namespace SClient
             {
                 { "RijndaelPSKEncrypter_PASSWORD", "password" }
             };
-            NetworkComms.DefaultSendReceiveOptions = new SendReceiveOptions(DPSManager.GetDataSerializer<JSONSerializer>(), pros, options);
+            NetworkComms.DefaultSendReceiveOptions = new SendReceiveOptions(DPSManager.GetDataSerializer<ProtobufSerializer>(), pros, null);
+            RijndaelPSKEncrypter.AddPasswordToOptions(NetworkComms.DefaultSendReceiveOptions.Options, "password");
+            NetworkComms.DefaultSendReceiveOptions.DataProcessors.Add(DPSManager.GetDataProcessor<RijndaelPSKEncrypter>());
+        }
+
+        private void ClientForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            NetworkComms.Shutdown();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -130,6 +140,7 @@ namespace SClient
 
         #endregion
     }
+
     [ProtoContract]
     public class Student
     {
