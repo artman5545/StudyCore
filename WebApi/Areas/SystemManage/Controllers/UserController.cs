@@ -72,5 +72,7 @@ namespace WebApi.Areas.SystemManage.Controllers
             _us.DelByQuery(e => id == e.Id);
             return CreateResult.For();
         }
+
+
     }
 }

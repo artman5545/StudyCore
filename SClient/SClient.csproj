@@ -33,6 +33,42 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ChanJoy.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ChanJoy.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ChanJoy.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ChanJoy.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="ChanJoy.Etl.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ChanJoy.Etl.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="ChanJoy.Etl.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ChanJoy.Etl.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="ChanJoy.Etl.Services, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ChanJoy.Etl.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="ChanJoy.Messaging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ChanJoy.Messaging.dll</HintPath>
+    </Reference>
+    <Reference Include="ChanJoy.Messaging.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ChanJoy.Messaging.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="ChanJoy.Services, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ChanJoy.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="ChanJoy.Web.Framework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ChanJoy.Web.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="NetworkCommsDotNet, Version=3.0.0.0, Culture=neutral, PublicKeyToken=f58108eb6480f6ec, processorArchitecture=MSIL">
       <HintPath>..\packages\NetworkCommsDotNet.3.0.3\lib\NetworkCommsDotNet.dll</HintPath>
     </Reference>
@@ -41,6 +77,22 @@
     </Reference>
     <Reference Include="protobuf-net, Version=2.4.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
       <HintPath>..\packages\protobuf-net.2.4.6\lib\net40\protobuf-net.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=5.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Senparc.Weixin, Version=4.18.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Senparc.Weixin.dll</HintPath>
+    </Reference>
+    <Reference Include="Senparc.Weixin.MP, Version=14.8.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Senparc.Weixin.MP.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.1.608.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\StackExchange.Redis.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -65,10 +117,19 @@
     <Compile Include="ClientForm.Designer.cs">
       <DependentUpon>ClientForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MQRecive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MQRecive.Designer.cs">
+      <DependentUpon>MQRecive.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ClientForm.resx">
       <DependentUpon>ClientForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MQRecive.resx">
+      <DependentUpon>MQRecive.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -92,6 +153,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\ChanJoy.Core.dll" />
+    <Content Include="lib\ChanJoy.Data.dll" />
+    <Content Include="lib\ChanJoy.Etl.Client.dll" />
+    <Content Include="lib\ChanJoy.Etl.Models.dll" />
+    <Content Include="lib\ChanJoy.Etl.Services.dll" />
+    <Content Include="lib\ChanJoy.Messaging.dll" />
+    <Content Include="lib\ChanJoy.Messaging.Model.dll" />
+    <Content Include="lib\ChanJoy.Services.dll" />
+    <Content Include="lib\ChanJoy.Web.Framework.dll" />
+    <Content Include="lib\RabbitMQ.Client.dll" />
+    <Content Include="lib\Senparc.Weixin.dll" />
+    <Content Include="lib\Senparc.Weixin.MP.dll" />
+    <Content Include="lib\StackExchange.Redis.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

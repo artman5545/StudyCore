@@ -6,6 +6,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataManage.Models;
+using DataManage.Service;
 
 namespace IdServer
 {
@@ -59,6 +61,7 @@ namespace IdServer
 
         public static List<TestUser> GetUsers()
         {
+            
             return new List<TestUser>
             {
                 new TestUser
