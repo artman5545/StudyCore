@@ -34,6 +34,8 @@ namespace RpcWebApi.Provider
                     consulOption.RegistrationServiceName = "RpcWebApi";
                     // 健康检查接口的端口号
                     consulOption.ConsulHealthCheckPort = 62880;
+                    // 健康检查接口的地址
+                    consulOption.ConsulHealthCheckAddress = "localhost";
                 });
             })
             .AddRpcServiceAssembly(typeof(AbpGrpcServiceModule).Assembly);
