@@ -43,9 +43,9 @@ namespace SClient
             {
                 { "RijndaelPSKEncrypter_PASSWORD", "password" }
             };
-            //NetworkComms.DefaultSendReceiveOptions = new SendReceiveOptions(DPSManager.GetDataSerializer<ProtobufSerializer>(), pros, null);
-            RijndaelPSKEncrypter.AddPasswordToOptions(NetworkComms.DefaultSendReceiveOptions.Options, "password");
-            NetworkComms.DefaultSendReceiveOptions.DataProcessors.Add(DPSManager.GetDataProcessor<RijndaelPSKEncrypter>());
+            NetworkComms.DefaultSendReceiveOptions = new SendReceiveOptions(DPSManager.GetDataSerializer<ProtoSerializer>(), pros, options);
+            //RijndaelPSKEncrypter.AddPasswordToOptions(NetworkComms.DefaultSendReceiveOptions.Options, "password");
+            //NetworkComms.DefaultSendReceiveOptions.DataProcessors.Add(DPSManager.GetDataProcessor<RijndaelPSKEncrypter>());
         }
 
         private void ClientForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -139,6 +139,20 @@ namespace SClient
         }
 
         #endregion
+    }
+
+    [DataSerializerProcessor(6)]
+    public class ProtoSerializer : DataSerializer
+    {
+        protected override object DeserialiseDataObjectInt(Stream inputStream, Type resultType, Dictionary<string, string> options)
+        {
+            return ProtoBuf.Serializer.Deserialize(resultType, inputStream);
+        }
+
+        protected override void SerialiseDataObjectInt(Stream ouputStream, object objectToSerialise, Dictionary<string, string> options)
+        {
+            ProtoBuf.Serializer.Serialize(ouputStream, objectToSerialise);
+        }
     }
 
     [ProtoContract]

@@ -16,7 +16,7 @@ namespace SClient
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MQRecive());
+            Application.Run(new ClientForm());
         }
     }
 }

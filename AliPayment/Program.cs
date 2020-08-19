@@ -64,8 +64,25 @@ namespace AliPayment
             ////var data= AnalyzeIDCard("12010119350307147X",out b);
             ////Console.WriteLine(data);
             ////var items = (typeof(HisPaymentMethodEnum)).GetMembers();
-            var n = PaymentsPluginAttribute.Get<HisPaymentMethodEnum>("Payments.ABCPay1");
+            //var n = PaymentsPluginAttribute.Get<HisPaymentMethodEnum>("Payments.ABCPay1");
+            //Console.Read();
+
+            //IF_消息提醒.MyCode.CommonFunction.Do初始化();
+
+            //Console.Write(IF_消息提醒.MyCode.CommonFunction.EtlWebApiUrl);
+            //Console.Read();
+            //Class4.TestLogin();
+            //string str = "5Y+C5pWwW2J1c0RhdGVUaW1lKOS4muWKoeWPkeeUn+aXtumXtCld5qC85byP5bqU56ym5ZCIW3l5eXlNTWRkSEhtbXNzU1NTXQ==";
+            //var bt = Convert.FromBase64String(str);
+            //Console.WriteLine(bt.Length);
+            //var json=Encoding.UTF8.GetString(Convert.FromBase64String(str));
+            //var resultDic = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+            //var dataJson = Encoding.UTF8.GetString(Convert.FromBase64String(resultDic["message"]));
+            //Console.WriteLine(dataJson);
+            //Console.ReadLine();
+            Class5.ReadFile();
             Console.Read();
+            
         }
 
 

@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>83f0f944-31cb-462e-81c1-d34ddd13f7d0</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netcoreapp3.1\RpcWebApi.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Abp" Version="5.12.0" />
+    <PackageReference Include="Abp.AspNetCore" Version="5.12.0" />
+    <PackageReference Include="Abp.Grpc.Server" Version="5.1.0" />
+    <PackageReference Include="MagicOnion.Hosting" Version="3.0.13" />
+    <PackageReference Include="MagicOnion.HttpGateway" Version="3.0.13" />
+    <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataManage\DataManage.csproj" />
+  </ItemGroup>
+
+
+</Project>

@@ -44,18 +44,18 @@ namespace SServer
             };
             timer.Elapsed += Timer_Elapsed;
             timer.Start();
-            //List<DataProcessor> pros = new List<DataProcessor>
-            //{
-            //    DPSManager.GetDataProcessor<RijndaelPSKEncrypter>()
-            //};
-            //Dictionary<string, string> options = new Dictionary<string, string>
-            //{
-            //    { "RijndaelPSKEncrypter_PASSWORD", "password" }
-            //};
-            //NetworkComms.DefaultSendReceiveOptions = new SendReceiveOptions(DPSManager.GetDataSerializer<JSONSerializer>(), null, null);
+            List<DataProcessor> pros = new List<DataProcessor>
+            {
+                DPSManager.GetDataProcessor<RijndaelPSKEncrypter>()
+            };
+            Dictionary<string, string> options = new Dictionary<string, string>
+            {
+                { "RijndaelPSKEncrypter_PASSWORD", "password" }
+            };
+            NetworkComms.DefaultSendReceiveOptions = new SendReceiveOptions(DPSManager.GetDataSerializer<ProtoSerializer>(), pros, options);
 
-            NetworkComms.DefaultSendReceiveOptions.DataProcessors.Add(DPSManager.GetDataProcessor<RijndaelPSKEncrypter>());
-            RijndaelPSKEncrypter.AddPasswordToOptions(NetworkComms.DefaultSendReceiveOptions.Options, "password");
+            //NetworkComms.DefaultSendReceiveOptions.DataProcessors.Add(DPSManager.GetDataProcessor<RijndaelPSKEncrypter>());
+            //RijndaelPSKEncrypter.AddPasswordToOptions(NetworkComms.DefaultSendReceiveOptions.Options, "password");
         }
 
         private void ServerForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -164,7 +164,19 @@ namespace SServer
 
         #endregion
     }
+    [DataSerializerProcessor(6)]
+    public class ProtoSerializer : DataSerializer
+    {
+        protected override object DeserialiseDataObjectInt(Stream inputStream, Type resultType, Dictionary<string, string> options)
+        {
+            return ProtoBuf.Serializer.Deserialize(resultType, inputStream);
+        }
 
+        protected override void SerialiseDataObjectInt(Stream ouputStream, object objectToSerialise, Dictionary<string, string> options)
+        {
+            ProtoBuf.Serializer.Serialize(ouputStream, objectToSerialise);
+        }
+    }
     [ProtoContract]
     public class Student
     {

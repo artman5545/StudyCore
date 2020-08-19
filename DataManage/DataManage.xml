@@ -4,5 +4,10 @@
         <name>DataManage</name>
     </assembly>
     <members>
+        <member name="T:DataManage.Mapping.MUserInfo">
+            <summary>
+            
+            </summary>
+        </member>
     </members>
 </doc>
