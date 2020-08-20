@@ -32,20 +32,22 @@ namespace RpcWebApi
             var magicOnionHost = MagicOnionHost.CreateDefaultBuilder()
             .UseMagicOnion(
                 new MagicOnionOptions(isReturnExceptionStackTraceInErrorDetail: true),
-                new ServerPort("127.0.0.1", 5002, ServerCredentials.Insecure))
+                new ServerPort("127.0.0.1", 19021, ServerCredentials.Insecure))
             .UseConsoleLifetime()
             .Build();
             services.AddSingleton<MagicOnionServiceDefinition>(magicOnionHost.Services.GetService<MagicOnionHostedServiceDefinition>().ServiceDefinition);
             magicOnionHost.StartAsync();
             services.AddMvc(e => e.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-            //services.AddControllers();
+            services.AddControllers();
             //services.AddAbp<AbpGrpcServiceModule>();
 
             services.AddCors(ops => ops.AddPolicy("cors", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MagicOnionServiceDefinition magicOnion, IApplicationLifetime  lifetime)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MagicOnionServiceDefinition magicOnion
+            , IApplicationLifetime lifetime
+            )
         {
             if (env.IsDevelopment())
             {
@@ -55,7 +57,7 @@ namespace RpcWebApi
             {
                 XmlDocumentPath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "RpcWebApi.xml")
             });
-            app.UseMagicOnionHttpGateway(magicOnion.MethodHandlers, new Channel("localhost:19021", ChannelCredentials.Insecure));
+            app.UseMagicOnionHttpGateway(magicOnion.MethodHandlers, new Channel("127.0.0.1:19021", ChannelCredentials.Insecure));
 
 
             //app.UseAbp();
@@ -73,7 +75,7 @@ namespace RpcWebApi
 
             ServiceEntity serviceEntity = new ServiceEntity
             {
-                IP = "192.168.21.95",
+                IP = "172.17.0.1",
                 Port = 5002,
                 ServiceName = "RpcWebApi",
                 ConsulIP = "127.0.0.1",
@@ -84,7 +86,7 @@ namespace RpcWebApi
             {
                 DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(5),//服务启动多久后注册
                 Interval = TimeSpan.FromSeconds(10),//健康检查时间间隔，或者称为心跳间隔
-                HTTP = $"http://{serviceEntity.IP}:{serviceEntity.Port}/health",//健康检查地址
+                HTTP = $"http://{serviceEntity.IP}:62880/api/values",//健康检查地址
                 Timeout = TimeSpan.FromSeconds(5)
             };
             var registration = new AgentServiceRegistration()
