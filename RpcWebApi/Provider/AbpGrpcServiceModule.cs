@@ -27,15 +27,14 @@ namespace RpcWebApi.Provider
                 option.UseConsul(consulOption =>
                 {
                     // Consul 服务注册地址
-                    consulOption.ConsulAddress = "10.0.75.1";
+                    consulOption.ConsulAddress = "127.0.0.1";
                     // Consul 服务注册端口号
                     consulOption.ConsulPort = 8500;
                     // 注册到 Consul 的服务名称
                     consulOption.RegistrationServiceName = "RpcWebApi";
                     // 健康检查接口的端口号
-                    consulOption.ConsulHealthCheckPort = 62880;
-                    // 健康检查接口的地址
-                    consulOption.ConsulHealthCheckAddress = "localhost";
+                    consulOption.ConsulHealthCheckPort = 19021;
+                    consulOption.ConsulHealthCheckAddress = "172.17.0.1";
                 });
             })
             .AddRpcServiceAssembly(typeof(AbpGrpcServiceModule).Assembly);
