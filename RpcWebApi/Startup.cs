@@ -13,7 +13,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.PlatformAbstractions;
 using System;
 using System.IO;
-using IApplicationLifetime = Microsoft.AspNetCore.Hosting.IApplicationLifetime;
 
 namespace RpcWebApi
 {
@@ -45,8 +44,9 @@ namespace RpcWebApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MagicOnionServiceDefinition magicOnion
-            , IApplicationLifetime lifetime
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env
+            , MagicOnionServiceDefinition magicOnion
+            , IHostApplicationLifetime lifetime
             )
         {
             if (env.IsDevelopment())
@@ -75,8 +75,8 @@ namespace RpcWebApi
 
             ServiceEntity serviceEntity = new ServiceEntity
             {
-                IP = "172.17.0.1",
-                Port = 5002,
+                IP = "127.0.0.1",
+                Port = 19021,
                 ServiceName = "RpcWebApi",
                 ConsulIP = "127.0.0.1",
                 ConsulPort = 8500
@@ -86,7 +86,8 @@ namespace RpcWebApi
             {
                 DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(5),//服务启动多久后注册
                 Interval = TimeSpan.FromSeconds(10),//健康检查时间间隔，或者称为心跳间隔
-                HTTP = $"http://{serviceEntity.IP}:62880/api/values",//健康检查地址
+                //HTTP = $"http://{serviceEntity.IP}:5000/api/values",//健康检查地址
+                HTTP = $"http://{serviceEntity.IP}:5000/health/check",
                 Timeout = TimeSpan.FromSeconds(5)
             };
             var registration = new AgentServiceRegistration()

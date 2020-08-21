@@ -1,7 +1,9 @@
-﻿using RpcServer.Common;
+﻿using Abp;
+using Abp.Grpc.Client.Utility;
+using Consul;
+using RpcClient.RpcServices;
 using System;
-using System.Threading.Tasks;
-namespace RpcServer
+namespace RpcClient
 {
     class Program
     {
@@ -9,11 +11,15 @@ namespace RpcServer
         {
             Console.WriteLine("启动客户端,是否调用接口？y/n");
             var result = Console.ReadKey();
-            while (result.KeyChar=='y')
+            using (var bootstrapper = AbpBootstrapper.Create<AbpGrpcClientDemoModule>())
             {
-                GetInfoAsync();
-                Console.WriteLine("是否继续调用？y/n");
-                result = Console.ReadKey();
+                bootstrapper.Initialize();
+                while (result.KeyChar == 'y')
+                {
+                    GetInfo2Async(bootstrapper);
+                    Console.WriteLine("是否继续调用？y/n");
+                    result = Console.ReadKey();
+                }
             }
             Console.ReadLine();
         }
@@ -21,7 +27,20 @@ namespace RpcServer
         public static async void GetInfoAsync()
         {
             var userInfo = await MyClient.GetUserInfoAsync(1);
-            Console.WriteLine(userInfo.UserName);
+            Console.WriteLine(userInfo);
+        }
+        public static async void GetInfo2Async(AbpBootstrapper bootstrapper)
+        {
+            // 调用接口
+            var connectionUtility = bootstrapper.IocManager.Resolve<IGrpcConnectionUtility>();
+            var server = connectionUtility.GetRemoteServiceForDirectConnection<IMyService>("RpcWebApi");
+            if (server != null)
+            {
+                var result = await server.GetUserInfo(1);
+                //// 展示结果
+                Console.WriteLine("Result:" + result);
+            }
+
         }
     }
 }

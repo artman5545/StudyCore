@@ -1,4 +1,5 @@
-﻿using DataManage.Mapping;
+﻿using Abp.Dependency;
+using DataManage.Mapping;
 using MagicOnion;
 
 namespace RpcWebApi.RpcServices

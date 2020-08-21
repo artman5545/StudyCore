@@ -1,4 +1,5 @@
-﻿using DataManage.Mapping;
+﻿using Abp.Dependency;
+using DataManage.Mapping;
 using MagicOnion;
 using MagicOnion.Server;
 
@@ -7,7 +8,7 @@ namespace RpcWebApi.RpcServices
     /// <summary>
     /// 
     /// </summary>
-    public class MyService : ServiceBase<IMyService>, IMyService
+    public class MyService : ServiceBase<IMyService>, IMyService, ITransientDependency
     {
         /// <summary>
         /// 

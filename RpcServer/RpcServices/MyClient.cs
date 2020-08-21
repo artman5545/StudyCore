@@ -1,14 +1,10 @@
 ﻿using DataManage.Mapping;
 using Grpc.Core;
-using MagicOnion;
 using MagicOnion.Client;
-using MagicOnion.Server;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace RpcServer.Common
+namespace RpcClient.RpcServices
 {
     /// <summary>
     /// 111
@@ -24,7 +20,7 @@ namespace RpcServer.Common
         {
             try
             {
-                var channel = new Channel("localhost", 19021, ChannelCredentials.Insecure);
+                var channel = new Channel("localhost", 8500, ChannelCredentials.Insecure);
                 Console.WriteLine("开始连接服务器...");
                 await channel.ConnectAsync();
                 Console.WriteLine("连接成功！开始获取数据");

@@ -1,12 +1,10 @@
-﻿using DataManage.Mapping;
+﻿using Abp.Dependency;
+using DataManage.Mapping;
 using MagicOnion;
 
-namespace RpcServer.Common
+namespace RpcClient.RpcServices
 {
-    /// <summary>
-    /// 111
-    /// </summary>
-    public interface IMyService : IService<IMyService>
+    public interface IMyService : IService<IMyService>, ITransientDependency
     {
         /// <summary>
         /// 获取个人信息

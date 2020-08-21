@@ -2,7 +2,7 @@
 using MagicOnion.Server;
 using System;
 
-namespace RpcClient
+namespace RpcService
 {
     class Program
     {

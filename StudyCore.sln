@@ -23,11 +23,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PayMent", "PayMent", "{3F97
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AliPayment", "AliPayment\AliPayment.csproj", "{B33D5EF4-7170-43A0-A8D0-F676C148123F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpcClient", "RpcClient\RpcClient.csproj", "{DA69511A-1DDE-46DD-984E-834F302A3355}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RpcService", "RpcClient\RpcService.csproj", "{DA69511A-1DDE-46DD-984E-834F302A3355}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpcServer", "RpcServer\RpcServer.csproj", "{D3800F86-CAA0-491E-8C1D-F3019D0B9239}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RpcClient", "RpcServer\RpcClient.csproj", "{D3800F86-CAA0-491E-8C1D-F3019D0B9239}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpcWebApi", "RpcWebApi\RpcWebApi.csproj", "{8BA2CEBD-8BDE-4C61-B109-E5142622D34D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RpcWebApi", "RpcWebApi\RpcWebApi.csproj", "{8BA2CEBD-8BDE-4C61-B109-E5142622D34D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

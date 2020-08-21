@@ -2,7 +2,7 @@
 using MagicOnion;
 using MagicOnion.Server;
 
-namespace RpcClient.Common
+namespace RpcService.Common
 {
     public class MyService : ServiceBase<IMyService>, IMyService
     {

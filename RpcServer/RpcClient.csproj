@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MagicOnion" Version="3.0.13" />
+    <PackageReference Include="Abp.Grpc.Client" Version="5.1.0" />
   </ItemGroup>
 
   <ItemGroup>

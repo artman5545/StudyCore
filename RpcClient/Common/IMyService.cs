@@ -1,7 +1,7 @@
 ﻿using DataManage.Mapping;
 using MagicOnion;
 
-namespace RpcClient.Common
+namespace RpcService.Common
 {
     /// <summary>
     /// 111
