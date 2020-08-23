@@ -19,8 +19,8 @@ namespace RpcClient
             {
                 new GrpcServerNode
                 {
-                    GrpcServiceIp = "127.0.0.1",
                     GrpcServiceName = "RpcWebApi",
+                    GrpcServiceIp = "127.0.0.1",
                     GrpcServicePort = 19021
                 }
             });

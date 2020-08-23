@@ -8,7 +8,7 @@ namespace RpcWebApi.RpcServices
     /// <summary>
     /// 
     /// </summary>
-    public class MyService : ServiceBase<IMyService>, IMyService, ITransientDependency
+    public class MyService : ServiceBase<IMyService>, IMyService
     {
         /// <summary>
         /// 

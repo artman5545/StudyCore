@@ -1,6 +1,6 @@
 ﻿using Abp.Dependency;
-using DataManage.Mapping;
 using MagicOnion;
+using RpcClient.Mapping;
 
 namespace RpcClient.RpcServices
 {

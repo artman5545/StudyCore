@@ -73,6 +73,7 @@ namespace RpcWebApi
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
+            #region 注册到consul
             ServiceEntity serviceEntity = new ServiceEntity
             {
                 IP = "127.0.0.1",
@@ -93,17 +94,19 @@ namespace RpcWebApi
             var registration = new AgentServiceRegistration()
             {
                 Checks = new[] { httpCheck },
-                ID = Guid.NewGuid().ToString(),
-                Name = serviceEntity.ServiceName,
+                ID = Guid.NewGuid().ToString(),//集群中的单个服务名称
+                Name = serviceEntity.ServiceName,//集群取名称
                 Address = serviceEntity.IP,
                 Port = serviceEntity.Port,
                 Tags = new[] { $"urlprefix-/{serviceEntity.ServiceName}" }//添加 urlprefix-/servicename 格式的 tag 标签，以便 Fabio 识别
             };
-            consulClient.Agent.ServiceRegister(registration).Wait();//服务启动时注册，内部实现其实就是使用 Consul API 进行注册（HttpClient发起）
+            consulClient.Agent.ServiceRegister(registration);//服务启动时注册，内部实现其实就是使用 Consul API 进行注册（HttpClient发起）
+
             lifetime.ApplicationStopping.Register(() =>
             {
                 consulClient.Agent.ServiceDeregister(registration.ID).Wait();//服务停止时取消注册
             });
+            #endregion
         }
     }
     public class ServiceEntity
