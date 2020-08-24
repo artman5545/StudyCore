@@ -1,13 +1,13 @@
 {
   "Routes": [
     {
-      "UpstreamPathTemplate": "/health/{url}",
+      "UpstreamPathTemplate": "/",
       "UpstreamHttpMethod": [
         "Get",
         "Post"
       ],
       "DownstreamScheme": "http",
-      "DownstreamPathTemplate": "/health/{url}",
+      "DownstreamPathTemplate": "/",
       "DownstreamHttpVersion": "2.0",
       //"AddHeadersToRequest": {},
       //"AddClaimsToRequest": {},
@@ -47,10 +47,10 @@
         "DurationOfBreak": 10000, //熔断时间ms毫秒
         "TimeoutValue": 2000 //如果下游请求的处理时间超过多少将自动将请求设为超时
       }
-      //"AuthenticationOptions": {
-      //  "AuthenticationProviderKey": "",
-      //  "AllowedScopes": []
-      //},
+      //"AuthenticationOptions": {//身份认证
+      //  "AuthenticationProviderKey": "UserGatewayKey",
+      //  "AllowedScopes": [ "api1" ]
+      //}
       //"HttpHandlerOptions": {
       //  "AllowAutoRedirect": true,
       //  "UseCookieContainer": true,
@@ -63,7 +63,7 @@
       "UpstreamPathTemplate": "swagger/{url}",
       "UpstreamHttpMethod": [ "Get", "Post" ],
       "UseServiceDiscovery": true,
-      "ServiceName": "WebClient",
+      "ServiceName": "RpcWebApi",
       "LoadBalancerOptions": {
         "Type": "RoundRobin"
       }

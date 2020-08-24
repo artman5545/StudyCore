@@ -20,7 +20,7 @@ namespace RpcWebApi.Provider
             Configuration.Modules.UseGrpcService(option =>
             {
                 // GRPC 服务绑定的 IP 地址
-                option.GrpcBindAddress = "127.0.0.1";
+                option.GrpcBindAddress = "0.0.0.0";
                 // GRPC 服务绑定的 端口号
                 option.GrpcBindPort = 19021;
                 // 启用 Consul 服务注册

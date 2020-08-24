@@ -1,3 +1,4 @@
+using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +25,15 @@ namespace WebGateway
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddAuthentication("Bearer")
+            //    .AddIdentityServerAuthentication("UserGatewayKey" //configuration.json
+            //    , ops =>
+            //    {
+            //        ops.RequireHttpsMetadata = false;
+            //        ops.Authority = "https://localhost:44383";
+            //        ops.ApiName = "api1";//ApiResourceÆ¥Åä
+            //        ops.SupportedTokens = SupportedTokens.Both;
+            //    });
             services.AddOcelot()
                 .AddConsul()
                 .AddCacheManager(e =>

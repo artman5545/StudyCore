@@ -40,7 +40,7 @@ namespace WebApi
                     {
                         ops.RequireHttpsMetadata = false;
                         ops.Authority = "https://localhost:44383";
-                        ops.ApiName = "api1";
+                        ops.ApiName = "api1";//ApiResource匹配
                     });
             #endregion
 
@@ -69,9 +69,9 @@ namespace WebApi
             app.UseRouting();
 
             app.UseCors("cors");
-            //app.UseAuthorization();//这里要被注释
-            app.UseAuthentication();
+            app.UseAuthentication();//鉴权
 
+            app.UseAuthorization();//授权
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>

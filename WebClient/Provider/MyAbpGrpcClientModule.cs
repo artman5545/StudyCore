@@ -23,14 +23,14 @@ namespace WebClient.Provider
                 {
                     GrpcServiceName = "RpcWebApi",
                     GrpcServiceIp = "127.0.0.1",
-                    GrpcServicePort = 5050
+                    GrpcServicePort = 19021
                 }
             });
         }
 
         public override void Initialize()
         {
-            
+            IocManager.RegisterAssemblyByConvention(typeof(MyAbpGrpcClientModule).Assembly);
         }
     }
 }

@@ -31,7 +31,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RpcWebApi", "RpcWebApi\RpcW
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebGateway", "WebGateway\WebGateway.csproj", "{FD2CD4F6-A0DE-4C6A-9404-2DB37506D367}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebClient", "WebClient\WebClient.csproj", "{54D8A807-682E-4B06-9E2C-006837004D47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebClient", "WebClient\WebClient.csproj", "{54D8A807-682E-4B06-9E2C-006837004D47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticationCenter", "AuthenticationCenter\AuthenticationCenter.csproj", "{F847EC32-1931-4D34-9530-4C9801F928DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +85,10 @@ Global
 		{54D8A807-682E-4B06-9E2C-006837004D47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54D8A807-682E-4B06-9E2C-006837004D47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54D8A807-682E-4B06-9E2C-006837004D47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F847EC32-1931-4D34-9530-4C9801F928DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F847EC32-1931-4D34-9530-4C9801F928DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F847EC32-1931-4D34-9530-4C9801F928DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F847EC32-1931-4D34-9530-4C9801F928DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +105,7 @@ Global
 		{8BA2CEBD-8BDE-4C61-B109-E5142622D34D} = {EB6BA6A1-C5E2-4295-B79F-6B312EA95D4B}
 		{FD2CD4F6-A0DE-4C6A-9404-2DB37506D367} = {EB6BA6A1-C5E2-4295-B79F-6B312EA95D4B}
 		{54D8A807-682E-4B06-9E2C-006837004D47} = {EB6BA6A1-C5E2-4295-B79F-6B312EA95D4B}
+		{F847EC32-1931-4D34-9530-4C9801F928DB} = {EB6BA6A1-C5E2-4295-B79F-6B312EA95D4B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4BD91699-4C6B-4AD3-9572-F5FAFF89F6E6}

@@ -63,12 +63,12 @@ namespace IdServer
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseIdentityServer();
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseIdentityServer();
             //app.UseEndpoints(endpoints =>
             //{
             //    endpoints.MapControllers();

@@ -12,6 +12,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore;
 using System.Net;
+using System.Runtime.InteropServices;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace RpcWebApi
 {
@@ -19,10 +21,10 @@ namespace RpcWebApi
     {
         public static async Task Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+        public static IWebHostBuilder CreateHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
 
@@ -30,6 +32,10 @@ namespace RpcWebApi
         //    Host.CreateDefaultBuilder(args)
         //        .ConfigureWebHostDefaults(webBuilder =>
         //        {
+        //            webBuilder.ConfigureKestrel(ops =>
+        //            {
+        //                ops.ListenAnyIP(5000, o => o.Protocols = HttpProtocols.Http1AndHttp2);
+        //            });
         //            webBuilder.UseStartup<Startup>();
         //        });
     }
