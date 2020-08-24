@@ -18,9 +18,6 @@ namespace RpcWebApi.Controllers
         /// <summary>
         /// 健康检查接口
         /// </summary>
-        public IActionResult Check()
-        {
-            return Ok("OJBK");
-        }
+        public IActionResult Check() => Ok("OJBK");
     }
 }

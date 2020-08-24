@@ -51,7 +51,7 @@ namespace RpcClient
         {
             // 调用接口
             var connectionUtility = bootstrapper.IocManager.Resolve<IGrpcConnectionUtility>();
-            var server = connectionUtility.GetRemoteServiceForConsul<IMyService>("RpcWebApi");
+            var server = connectionUtility.GetRemoteServiceForDirectConnection<IMyService>("WebServer");
             if (server != null)
             {
                 var result = await server.GetUserInfo(1);

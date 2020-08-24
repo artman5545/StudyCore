@@ -4,7 +4,10 @@ using RpcClient.Mapping;
 
 namespace RpcClient.RpcServices
 {
-    public interface IMyService : IService<IMyService>, ITransientDependency
+    /// <summary>
+    /// 111
+    /// </summary>
+    public interface IMyService : IService<IMyService>
     {
         /// <summary>
         /// 获取个人信息

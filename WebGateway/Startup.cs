@@ -32,7 +32,7 @@ namespace WebGateway
                 })
                 .AddPolly()//Ë²Ì¬¹ÊÕÏ
                 ;
-            services.AddSingleton<IOcelotCache<CachedResponse>, MyCache>();//Ìæ»»Ä¬ÈÏ»º´æ
+            //services.AddSingleton<IOcelotCache<CachedResponse>, MyCache>();//Ìæ»»Ä¬ÈÏ»º´æ
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,12 +1,16 @@
-﻿using Abp.Grpc.Client;
+﻿using Abp.AspNetCore;
+using Abp.Grpc.Client;
 using Abp.Grpc.Client.Configuration;
 using Abp.Grpc.Client.Extensions;
 using Abp.Modules;
 
-namespace RpcClient
+namespace WebClient.Provider
 {
-    [DependsOn(typeof(AbpGrpcClientModule))]
-    public class AbpGrpcClientDemoModule : AbpModule
+    /// <summary>
+    /// 
+    /// </summary>
+    [DependsOn(typeof(AbpAspNetCoreModule), typeof(AbpGrpcClientModule))]
+    public class MyAbpGrpcClientModule : AbpModule
     {
         public override void PreInitialize()
         {
@@ -17,7 +21,7 @@ namespace RpcClient
             {
                 new GrpcServerNode
                 {
-                    GrpcServiceName = "WebServer",
+                    GrpcServiceName = "RpcWebApi",
                     GrpcServiceIp = "127.0.0.1",
                     GrpcServicePort = 5050
                 }
@@ -26,8 +30,7 @@ namespace RpcClient
 
         public override void Initialize()
         {
-            IocManager.RegisterAssemblyByConvention(typeof(AbpGrpcClientDemoModule).Assembly);
-            //base.Initialize();
+            
         }
     }
 }

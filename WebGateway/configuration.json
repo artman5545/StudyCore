@@ -1,35 +1,26 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/{url}",
+      "UpstreamPathTemplate": "/health/{url}",
       "UpstreamHttpMethod": [
         "Get",
         "Post"
       ],
+      "DownstreamScheme": "http",
+      "DownstreamPathTemplate": "/health/{url}",
+      "DownstreamHttpVersion": "2.0",
       //"AddHeadersToRequest": {},
       //"AddClaimsToRequest": {},
       //"RouteClaimsRequirement": {},
       //"AddQueriesToRequest": {},
       //"RequestIdKey": "",
-      //"FileCacheOptions": {
-      //  "TtlSeconds": 0,
-      //  "Region": ""
-      //},
       //"ReRouteIsCaseSensitive": false,
-      //"ServiceName": "",
-      "DownstreamScheme": "http",
-      "UpstreamPathTemplate": "/{url}",
       //"DownstreamHostAndPorts": [
       //  {
       //    "Host": "127.0.0.1",
       //    "Port": 5000
       //  }
       //],
-      //"QoSOptions": {
-      //  "ExceptionsAllowedBeforeBreaking": 0,
-      //  "DurationOfBreak": 0,
-      //  "TimeoutValue": 0
-      //},
       //"LoadBalancer": "",
       "LoadBalancerOptions": {
         "Type": "RoundRobin" //轮询   "LeastConnection" //最少链接的服务器 "NoLoadBalance" //不负载均衡 "CookieStickySessions" //会话粘滞
@@ -39,19 +30,7 @@
         //"Expiry": 18888
       },
       "UseServiceDiscovery": true, //使用服务发现 consul
-      "ServiceName": "RpcWebApi",
-      "GlobalConfiguration": {
-        "BaseUrl": "http://127.0.0.1:5050", //对外公布地址
-        "ServiceDiscoveryProvider": {
-          "Host": "127.0.0.1",
-          "Port": 8500,
-          "Type": "Consul"
-        },
-        "RateLimitOptions": { //polly限流后返回信息定义
-          "QuotaExceededMessage": "too many request,try soon or later",
-          "HttpStatusCode": 444
-        }
-      },
+      "ServiceName": "WebServer",
       "FileCacheOptions": { //memorycache
         "TtlSeconds": 10,
         "Region": "UserCache"
@@ -63,10 +42,10 @@
         "Limit": 5,
         "PeriodTimespan": 30 //5m最多访问5次，30s后重试
       },
-      "QoSOptions": {//熔断
-        "ExceptionsAllowedBeforeBreaking": 3,//允许多少异常请求
-        "DurationOfBreak": 10000,//熔断时间ms毫秒
-        "TimeoutValue": 2000//如果下游请求的处理时间超过多少将自动将请求设为超时
+      "QoSOptions": { //熔断
+        "ExceptionsAllowedBeforeBreaking": 3, //允许多少异常请求
+        "DurationOfBreak": 10000, //熔断时间ms毫秒
+        "TimeoutValue": 2000 //如果下游请求的处理时间超过多少将自动将请求设为超时
       }
       //"AuthenticationOptions": {
       //  "AuthenticationProviderKey": "",
@@ -77,7 +56,31 @@
       //  "UseCookieContainer": true,
       //  "UseTracing": true
       //},
+    },
+    {
+      "DownstreamPathTemplate": "swagger/{url}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "swagger/{url}",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "UseServiceDiscovery": true,
+      "ServiceName": "WebClient",
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      }
     }
-  ]
+  ],
+
+  "GlobalConfiguration": {
+    "BaseUrl": "http://127.0.0.1:5050", //对外公布地址
+    "ServiceDiscoveryProvider": {
+      "Host": "127.0.0.1",
+      "Port": 8500,
+      "Type": "Consul"
+    },
+    "RateLimitOptions": { //polly限流后返回信息定义
+      "QuotaExceededMessage": "too many request,try soon or later",
+      "HttpStatusCode": 444
+    }
+  }
 
 }
