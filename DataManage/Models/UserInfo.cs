@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace DataManage.Models
 {
     public partial class UserInfo

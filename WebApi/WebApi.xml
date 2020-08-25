@@ -9,6 +9,12 @@
             用户数据接口
             </summary>
         </member>
+        <member name="M:WebApi.Areas.SystemManage.Controllers.UserController.#ctor(DataManage.Service.IUserService)">
+            <summary>
+            用户数据接口
+            </summary>
+            <param name="us"></param>
+        </member>
         <member name="M:WebApi.Areas.SystemManage.Controllers.UserController.Get(System.Int32,System.Int32)">
             <summary>
             获取人员列表

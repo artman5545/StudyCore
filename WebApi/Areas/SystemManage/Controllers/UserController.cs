@@ -20,7 +20,10 @@ namespace WebApi.Areas.SystemManage.Controllers
     public class UserController : ControllerBase
     {
         IUserService _us;
-        
+        /// <summary>
+        /// 用户数据接口
+        /// </summary>
+        /// <param name="us"></param>
         public UserController(IUserService us)
         {
             _us = us;
@@ -31,11 +34,11 @@ namespace WebApi.Areas.SystemManage.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ResponseMessage<IEnumerable<UserInfo>> Get(int pageIndex,int pageSize)
+        public ResponseMessage<IEnumerable<UserInfo>> Get(int pageIndex, int pageSize)
         {
             int total = 0;
-            var result = _us.FindList(e => true,o=>o.Id,out total,true,pageIndex,pageSize);
-            return CreateResult.For(result,total);
+            var result = _us.FindList(e => true, o => o.Id, out total, true, pageIndex, pageSize);
+            return CreateResult.For(result, total);
         }
 
         /// <summary>

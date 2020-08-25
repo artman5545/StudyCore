@@ -27,6 +27,7 @@ namespace WebApi
                    options.UseSqlServer(Configuration.GetConnectionString("bimcon")),
                    poolSize: 64
                );
+            services.AddScoped<coredbContext>();
             AutoInjection(services);
             services.AddControllers();
 
@@ -34,14 +35,14 @@ namespace WebApi
             services.AddMvc(ops => ops.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             #region 验证凭证
-            services.AddMvcCore().AddAuthorization();
-            services.AddAuthentication("Bearer")
-                    .AddIdentityServerAuthentication(ops =>
-                    {
-                        ops.RequireHttpsMetadata = false;
-                        ops.Authority = "https://localhost:44383";
-                        ops.ApiName = "api1";//ApiResource匹配
-                    });
+            //services.AddMvcCore().AddAuthorization();
+            //services.AddAuthentication("Bearer")
+            //        .AddIdentityServerAuthentication(ops =>
+            //        {
+            //            ops.RequireHttpsMetadata = false;
+            //            ops.Authority = "https://localhost:44383";
+            //            ops.ApiName = "api1";//ApiResource匹配
+            //        });
             #endregion
 
 
@@ -69,9 +70,9 @@ namespace WebApi
             app.UseRouting();
 
             app.UseCors("cors");
-            app.UseAuthentication();//鉴权
+            //app.UseAuthentication();//鉴权
 
-            app.UseAuthorization();//授权
+            //app.UseAuthorization();//授权
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>

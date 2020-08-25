@@ -26,6 +26,7 @@ namespace RpcWebApi
 
         public static IWebHostBuilder CreateHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+            .UseKestrel()
                 .UseStartup<Startup>();
 
         //public static IHostBuilder CreateHostBuilder(string[] args) =>
