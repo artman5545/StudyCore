@@ -8,7 +8,7 @@ namespace AbpWebApi
     /// <summary>
     /// 
     /// </summary>
-    [DependsOn(typeof(AbpAspNetCoreModule))]
+    [DependsOn(typeof(AbpAspNetCoreModule),typeof(AbpDBAccessModule))]
     public class AbpWebApiModule : AbpModule
     {
         /// <summary>

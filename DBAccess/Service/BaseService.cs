@@ -7,112 +7,112 @@ using Abp.Domain.Entities;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 using System.Linq;
+using Abp.EntityFrameworkCore;
+using DBAccess.Models;
 
 namespace DBAccess.Service
 {
-    public class BaseService<T, Tkey> : IBaseService<T, Tkey> where T : Entity<Tkey>
+    public class BaseService<T, Tkey> : AppRepository<T, Tkey>, IBaseService<T, Tkey> where T : Entity<Tkey>
     {
-        readonly IAppRepository<T, Tkey> _repository;
-        public BaseService(IAppRepository<T, Tkey> r)
+        public BaseService(IDbContextProvider<CoreDB> dbContextProvider):base(dbContextProvider)
         {
-            _repository = r;
         }
 
         public Task<int> AddAsync(T entity)
         {
-            return _repository.AddAsync(entity);
+            return this.AddAsync(entity);
         }
 
         public T AddEntity(T entity)
         {
-            return _repository.AddEntity(entity);
+            return this.AddEntity(entity);
         }
 
         public int AddRange(IEnumerable<T> entity)
         {
-            return _repository.AddRange(entity);
+            return this.AddRange(entity);
         }
 
         public Task<int> AddRangeAsync(IEnumerable<T> entities)
         {
-            return _repository.AddRangeAsync(entities);
+            return this.AddRangeAsync(entities);
         }
 
         public bool DelEntity(T entity)
         {
-            return _repository.DelEntity(entity);
+            return this.DelEntity(entity);
         }
 
         public int DeleteByWhere(Expression<Func<T, bool>> where)
         {
-            return _repository.DeleteByWhere(where);
+            return this.DeleteByWhere(where);
         }
 
         public bool DelRange(IEnumerable<T> entities)
         {
-            return _repository.DelRange(entities);
+            return this.DelRange(entities);
         }
 
         public bool ExcuteByTran(Func<T> func, out string msg)
         {
-            return _repository.ExcuteByTran(func, out msg);
+            return this.ExcuteByTran(func, out msg);
         }
 
         public int ExecuteSqlCommand(string sql, params object[] objectparams)
         {
-            return _repository.ExecuteSqlCommand(sql, objectparams);
+            return this.ExecuteSqlCommand(sql, objectparams);
         }
 
         public int GetCount(Expression<Func<T, bool>> where)
         {
-            return _repository.GetCount(where);
+            return this.GetCount(where);
         }
 
         public IList<TResult> GetListByJoin<T2, TResult, Tkey1, Tkey2>(Expression<Func<T, bool>> where, Expression<Func<T2, bool>> where2, Expression<Func<T, Tkey1>> outer, Expression<Func<T2, Tkey1>> inner, Expression<Func<T, IEnumerable<T2>, TResult>> resultSelector)
             where T2 : class
             where TResult : class
         {
-            return _repository.GetListByJoin<T2, TResult, Tkey1, Tkey2>(where, where2, outer, inner, resultSelector);
+            return this.GetListByJoin<T2, TResult, Tkey1, Tkey2>(where, where2, outer, inner, resultSelector);
         }
 
         public IQueryable<T> LoadEntities(Expression<Func<T, bool>> where)
         {
-            return _repository.LoadEntities(where);
+            return this.LoadEntities(where);
         }
 
         public IQueryable<T> LoadEntities<TKey>(Expression<Func<T, bool>> where, Expression<Func<T, TKey>> orderby, string asc, int pageIndex, int pageSize, out int recordCount)
         {
-            return _repository.LoadEntities(where, orderby, asc, pageIndex, pageSize, out recordCount);
+            return this.LoadEntities(where, orderby, asc, pageIndex, pageSize, out recordCount);
         }
 
         public T LoadEntity(Expression<Func<T, bool>> where)
         {
-            return _repository.LoadEntity(where);
+            return this.LoadEntity(where);
         }
 
         public List<T> SqlQuery(string sql, params object[] objectparams)
         {
-            return _repository.SqlQuery(sql, objectparams);
+            return this.SqlQuery(sql, objectparams);
         }
 
         public int UpdateEntities(Expression<Func<T, bool>> where, Action<T> action)
         {
-            return _repository.UpdateEntities(where, action);
+            return this.UpdateEntities(where, action);
         }
 
         public Task<int> UpdateEntitiesAsync(Expression<Func<T, bool>> where, Action<T> action)
         {
-            return _repository.UpdateEntitiesAsync(where, action);
+            return this.UpdateEntitiesAsync(where, action);
         }
 
         public bool UpdateEntity(T entity)
         {
-            return _repository.UpdateEntity(entity);
+            return this.UpdateEntity(entity);
         }
 
         public Task<int> UpdateEntityAsync(T entity)
         {
-            return _repository.UpdateEntityAsync(entity);
+            return this.UpdateEntityAsync(entity);
         }
     }
 }

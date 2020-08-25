@@ -1,11 +1,9 @@
 ﻿using Abp.Modules;
-using App.DBHelper;
-using DBAccess.Models;
 using System;
 
 namespace DBAccess
 {
-    [DependsOn(typeof(AbpDBHelperModule))]
+    //[DependsOn(typeof(AbpDBHelperModule))]
     public class AbpDBAccessModule: AbpModule
     {
         //public override void PreInitialize()
