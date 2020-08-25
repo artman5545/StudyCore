@@ -1,5 +1,6 @@
 ﻿using Abp.AspNetCore.Mvc.Controllers;
 using App.HttpHelper;
+using DBAccess.Models;
 using DBAccess.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,32 +15,27 @@ namespace AbpWebApi.Controllers
     [Route("api/[controller]")]
     public class AdminInfoController : AbpController
     {
-        readonly ITestService _adminService;
+        readonly IAdministratorService _adminService;
         /// <summary>
         /// 用户管理
         /// </summary>
         /// <param name="admin"></param>
-        public AdminInfoController(ITestService admin)
+        public AdminInfoController(IAdministratorService admin)
         {
             this._adminService = admin;
         }
 
+        /// <summary>
+        /// 获取人员列表
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public int get(int i)
+        public ResponseMessage<List<Guid>> Get(int pageIndex, int pageSize)
         {
-            return this._adminService.GetO(i);
+            int total = 0;
+            var result = _adminService.LoadEntities(e => true, o => o.Id, "asc", pageIndex, pageSize, out total).Select(e => e.Id).ToList();
+            return CreateResult.For(result, total);
         }
-        ///// <summary>
-        ///// 获取人员列表
-        ///// </summary>
-        ///// <returns></returns>
-        //[HttpGet]
-        //public ResponseMessage<List<Administrator>> Get(int pageIndex, int pageSize)
-        //{
-        //    int total = 0;
-        //    var result = _adminService.LoadEntities(e => true, o => o.Id,"asc",pageIndex,pageSize,out total).ToList();
-        //    return CreateResult.For(result, total);
-        //}
 
         ///// <summary>
         ///// 新增用户

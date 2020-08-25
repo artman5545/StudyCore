@@ -2,18 +2,21 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using DBAccess.Service;
+using App.DBHelper;
+using Abp.Domain.Entities;
+using DBAccess.Models;
+using Abp.EntityFrameworkCore;
 
 namespace DBAccess.Service
 {
-    public interface ITestService
+    public interface IAdministratorService : IAppRepository<DdutyDoctor, Guid>
     {
-        int GetO(int i);
     }
-    public class TestService : ITestService, ITransientDependency
+    public class AdministratorService : AppRepository<DdutyDoctor, Guid>, IAdministratorService, ITransientDependency
     {
-        public int GetO(int i)
+        public AdministratorService(IDbContextProvider<AbpDbContext> dbContextProvider) : base(dbContextProvider)
         {
-            return i + new Random().Next(10);
         }
     }
 }

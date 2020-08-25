@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Abp.Domain.Entities;
+using System;
 using System.Collections.Generic;
 
 #nullable disable
 
 namespace DBAccess.Models
 {
-    public partial class DdutyDoctor
+    public partial class DdutyDoctor : Entity<Guid>
     {
         public Guid Id { get; set; }
         public Guid InstitutionId { get; set; }
