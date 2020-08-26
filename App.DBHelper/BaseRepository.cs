@@ -14,12 +14,11 @@ using System.Threading.Tasks;
 
 namespace App.DBHelper
 {
-    [Abp.Domain.Uow.UnitOfWork]
-    public class BaseRepository<TDB, T, TKey> : EfCoreRepositoryBase<TDB, T, TKey> ,IRepository<T,TKey>
-        where TDB :DbContext
-        where T : class, IEntity<TKey> 
+    public class BaseRepository<TDB, T, TKey> : EfCoreRepositoryBase<TDB, T, TKey>
+        where TDB :AbpDbContext
+        where T : Entity<TKey> 
     {
-        public DbContext _dbContext;
+        public AbpDbContext _dbContext;
 
         /// <summary>
         /// 数据库类型
@@ -163,7 +162,7 @@ namespace App.DBHelper
         public virtual int GetEntitiesCount(Expression<Func<T, bool>> where)
         {
             //return _dbContext.Set<T>().Count(where);
-            return GetAll().Where(where).Count();
+            return Table.Where(where).Count();
         }
         /// <summary>
         /// 
@@ -303,8 +302,8 @@ namespace App.DBHelper
         }
     }
     public class BaseRepository<TDB, T> : BaseRepository<TDB, T, Guid>
-        where TDB : DbContext
-        where T : class, IEntity<Guid>
+        where TDB : AbpDbContext
+        where T : Entity<Guid>
     {
         /// <summary>
         /// 数据库类型

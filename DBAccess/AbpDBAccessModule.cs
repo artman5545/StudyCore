@@ -18,7 +18,7 @@ namespace DBAccess
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
             
-            IocManager.Register(typeof(IDbContextProvider<CoreDB>), typeof(UnitOfWorkDbContextProvider<CoreDB>), Abp.Dependency.DependencyLifeStyle.Singleton);
+            IocManager.Register(typeof(IDbContextProvider<CoreDB>), typeof(UnitOfWorkDbContextProvider<CoreDB>), Abp.Dependency.DependencyLifeStyle.Transient);
             
         }
     }

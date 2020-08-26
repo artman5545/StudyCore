@@ -13,14 +13,14 @@ namespace AbpWebApi.Controllers
     /// 用户管理
     /// </summary>
     [Route("api/[controller]")]
-    public class AdminInfoController : AbpController
+    public class EmployeeController : AbpController
     {
         readonly IAdministratorService _adminService;
         /// <summary>
         /// 用户管理
         /// </summary>
         /// <param name="admin"></param>
-        public AdminInfoController(IAdministratorService admin)
+        public EmployeeController(IAdministratorService admin)
         {
             this._adminService = admin;
         }

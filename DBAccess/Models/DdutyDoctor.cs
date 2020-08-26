@@ -1,4 +1,5 @@
 ﻿using Abp.Domain.Entities;
+using Abp.Domain.Repositories;
 using System;
 using System.Collections.Generic;
 
@@ -20,5 +21,10 @@ namespace DBAccess.Models
         public virtual Tdepartment Depart { get; set; }
         public virtual TdoctorList Doctor { get; set; }
         public virtual TdutyDepartment DutyDepart { get; set; }
+
+        public bool IsTransient()
+        {
+            return true;
+        }
     }
 }

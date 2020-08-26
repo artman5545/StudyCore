@@ -11,12 +11,12 @@ using App.DBHelper;
 
 namespace DBAccess.Models
 {
-    [AutoRepositoryTypes(
-        typeof(BaseRepository<,>),
-        typeof(BaseRepository<,,>),
-        typeof(BaseService<>),
-        typeof(BaseService<,>)
-        )]
+    //[AutoRepositoryTypes(
+    //    typeof(BaseRepository<,>),
+    //    typeof(BaseRepository<,,>),
+    //    typeof(BaseService<>),
+    //    typeof(BaseService<,>)
+    //    )]
     public partial class CoreDB : AbpDbContext
     {
         public CoreDB(DbContextOptions<CoreDB> options)
