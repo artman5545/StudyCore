@@ -2,12 +2,6 @@
 using Abp.EntityFrameworkCore.Uow;
 using Abp.Modules;
 using DBAccess.Models;
-using DBAccess.Service;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyModel.Resolution;
-using System;
 using System.Reflection;
 
 namespace DBAccess
@@ -23,7 +17,9 @@ namespace DBAccess
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
-            //IocManager.Register(typeof(IDbContextProvider<CoreDB>), typeof(UnitOfWorkDbContextProvider<CoreDB>), Abp.Dependency.DependencyLifeStyle.Transient);
+            
+            IocManager.Register(typeof(IDbContextProvider<CoreDB>), typeof(UnitOfWorkDbContextProvider<CoreDB>), Abp.Dependency.DependencyLifeStyle.Singleton);
+            
         }
     }
 }

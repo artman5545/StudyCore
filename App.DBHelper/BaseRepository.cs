@@ -1,5 +1,6 @@
 ﻿using Abp.Dependency;
 using Abp.Domain.Entities;
+using Abp.Domain.Repositories;
 using Abp.EntityFrameworkCore;
 using Abp.EntityFrameworkCore.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -13,11 +14,12 @@ using System.Threading.Tasks;
 
 namespace App.DBHelper
 {
-    public class BaseRepository<TDB, T, TKey> : EfCoreRepositoryBase<TDB, T, TKey> 
-        where TDB :AbpDbContext
+    [Abp.Domain.Uow.UnitOfWork]
+    public class BaseRepository<TDB, T, TKey> : EfCoreRepositoryBase<TDB, T, TKey> ,IRepository<T,TKey>
+        where TDB :DbContext
         where T : class, IEntity<TKey> 
     {
-        public TDB _dbContext;
+        public DbContext _dbContext;
 
         /// <summary>
         /// 数据库类型
@@ -26,7 +28,7 @@ namespace App.DBHelper
         public BaseRepository(IDbContextProvider<TDB> dbContextProvider)
             : base(dbContextProvider)
         {
-            _dbContext = dbContextProvider.GetDbContext();
+            //_dbContext = dbContextProvider.GetDbContext();
         }
         /// <summary>
         /// 
@@ -139,20 +141,20 @@ namespace App.DBHelper
         /// <param name="pageSize"></param>
         /// <param name="recordCount"></param>
         /// <returns></returns>
-        public virtual IQueryable<T> LoadEntities<TKey>(Expression<Func<T, bool>> where, Expression<Func<T, TKey>> orderby, string asc, int pageIndex, int pageSize, out int recordCount)
+        public virtual IQueryable<T> LoadEntities<Key>(Expression<Func<T, bool>> where, Expression<Func<T, Key>> orderby, string asc, int pageIndex, int pageSize, out int recordCount)
         {
             pageIndex -= 1;
             recordCount = GetEntitiesCount(where);
             if (asc.Equals("asc"))
             {
-                return _dbContext.Set<T>().Where(where).OrderBy(orderby).Skip(pageIndex * pageSize).Take(pageSize);
+                return GetAll().Where(where).OrderBy(orderby).Skip(pageIndex * pageSize).Take(pageSize);
             }
             else
             {
-                return _dbContext.Set<T>().Where(where).OrderByDescending(orderby).Skip(pageIndex * pageSize).Take(pageSize);
+                return GetAll().Where(where).OrderByDescending(orderby).Skip(pageIndex * pageSize).Take(pageSize);
             }
         }
-
+        
         /// <summary>
         /// 
         /// </summary>
@@ -160,7 +162,8 @@ namespace App.DBHelper
         /// <returns></returns>
         public virtual int GetEntitiesCount(Expression<Func<T, bool>> where)
         {
-            return _dbContext.Set<T>().Count(where);
+            //return _dbContext.Set<T>().Count(where);
+            return GetAll().Where(where).Count();
         }
         /// <summary>
         /// 
@@ -261,7 +264,7 @@ namespace App.DBHelper
         /// <param name="inner"></param>
         /// <param name="resultSelector"></param>
         /// <returns></returns>
-        public virtual IList<TResult> GetListByJoin<T2, TResult, Tkey, Tkey2>(Expression<Func<T, bool>> where, Expression<Func<T2, bool>> where2, Expression<Func<T, Tkey>> outer, Expression<Func<T2, Tkey>> inner, Expression<Func<T, IEnumerable<T2>, TResult>> resultSelector) where T2 : class where TResult : class
+        public virtual IList<TResult> GetListByJoin<T2, TResult, key, Tkey2>(Expression<Func<T, bool>> where, Expression<Func<T2, bool>> where2, Expression<Func<T, key>> outer, Expression<Func<T2, key>> inner, Expression<Func<T, IEnumerable<T2>, TResult>> resultSelector) where T2 : class where TResult : class
         {
             var query = _dbContext.Set<T>().Where(where);
             var query2 = _dbContext.Set<T2>().Where(where2);
@@ -299,15 +302,15 @@ namespace App.DBHelper
             return _dbContext.Set<T>().Where(where).Count();
         }
     }
-    public class AppRepository<TDB, T> : BaseRepository<TDB, T, Guid>
-        where TDB : AbpDbContext
+    public class BaseRepository<TDB, T> : BaseRepository<TDB, T, Guid>
+        where TDB : DbContext
         where T : class, IEntity<Guid>
     {
         /// <summary>
         /// 数据库类型
         /// </summary>
         //private DatabaseType _dbType { get; set; }
-        public AppRepository(IDbContextProvider<TDB> dbContextProvider)
+        public BaseRepository(IDbContextProvider<TDB> dbContextProvider)
             : base(dbContextProvider)
         {
         }

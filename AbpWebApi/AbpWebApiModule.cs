@@ -17,7 +17,7 @@ namespace AbpWebApi
     {
         public override void PreInitialize()
         {
-            Configuration.UnitOfWork.Timeout = TimeSpan.FromSeconds(5);
+            //Configuration.UnitOfWork.Timeout = TimeSpan.FromSeconds(5);
             Configuration.Modules.AbpWebCommon().SendAllExceptionsToClients = true;
         }
         /// <summary>

@@ -12,8 +12,8 @@ using App.DBHelper;
 namespace DBAccess.Models
 {
     [AutoRepositoryTypes(
-        typeof(IRepository<>),
-        typeof(IRepository<,>),
+        typeof(BaseRepository<,>),
+        typeof(BaseRepository<,,>),
         typeof(BaseService<>),
         typeof(BaseService<,>)
         )]
