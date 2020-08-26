@@ -1,22 +1,19 @@
-﻿using Abp.Dependency;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using DBAccess.Service;
-using App.DBHelper;
-using Abp.Domain.Entities;
-using DBAccess.Models;
+﻿using Abp.Application.Services;
+using Abp.Dependency;
+using Abp.Domain.Uow;
 using Abp.EntityFrameworkCore;
+using DBAccess.Models;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace DBAccess.Service
 {
-    public interface IAdministratorService : IAppRepository<DdutyDoctor, Guid>
+    public interface IAdministratorService : IBaseService<DdutyDoctor, Guid>
     {
     }
-    public class AdministratorService : AppRepository<DdutyDoctor, Guid>, IAdministratorService, ITransientDependency
+    public class AdministratorService : BaseService<DdutyDoctor, Guid>, IAdministratorService, ITransientDependency
     {
-        public AdministratorService(IDbContextProvider<AbpDbContext> dbContextProvider) : base(dbContextProvider)
-        {
-        }
+        public AdministratorService(IDbContextProvider<CoreDB> dbContextProvider) : base(dbContextProvider) { }
     }
 }

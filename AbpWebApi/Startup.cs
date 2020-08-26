@@ -1,4 +1,5 @@
 using Abp.AspNetCore;
+using Abp.Dependency;
 using Abp.EntityFrameworkCore;
 using DBAccess.Models;
 using Microsoft.AspNetCore.Builder;
@@ -28,7 +29,7 @@ namespace AbpWebApi
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddAbpDbContext<CoreDB>(conf =>
-                conf.DbContextOptions.UseSqlServer(Configuration.GetConnectionString("bimcon"))
+                conf.DbContextOptions.UseSqlServer(Configuration.GetConnectionString("Default"))
             );
             services.AddSwaggerGen(ops =>
             {

@@ -8,9 +8,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace App.DBHelper
+namespace DBAccess.Service
 {
-    public interface IAppRepository<T, TKey>: IRepository where T : class, IEntity<TKey>
+    public interface IAppRepository<T, TKey>: IRepository where T :  Entity<TKey>
     {
         /// <summary>
         /// 新增实体
@@ -154,7 +154,7 @@ namespace App.DBHelper
         bool ExcuteByTran(Func<T> func, out string msg);
     }
 
-    public interface IAppRepository<T> : IRepository where T : class, IEntity
+    public interface IAppRepository<T> : IRepository where T : Entity
     {
         /// <summary>
         /// 新增实体

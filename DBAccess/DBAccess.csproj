@@ -5,7 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Service\IRepository.cs" />
+    <Compile Remove="Service\Repository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Abp" Version="5.12.0" />
+    <PackageReference Include="Abp.EntityFrameworkCore" Version="5.12.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0-preview.7.20365.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0-preview.7.20365.15">
       <PrivateAssets>all</PrivateAssets>

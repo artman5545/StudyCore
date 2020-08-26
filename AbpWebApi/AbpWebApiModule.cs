@@ -2,6 +2,10 @@
 using Abp.Configuration.Startup;
 using Abp.Modules;
 using DBAccess;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.Reflection;
 
 namespace AbpWebApi
 {
@@ -11,11 +15,9 @@ namespace AbpWebApi
     [DependsOn(typeof(AbpAspNetCoreModule),typeof(AbpDBAccessModule))]
     public class AbpWebApiModule : AbpModule
     {
-        /// <summary>
-        /// 
-        /// </summary>
         public override void PreInitialize()
         {
+            Configuration.UnitOfWork.Timeout = TimeSpan.FromSeconds(5);
             Configuration.Modules.AbpWebCommon().SendAllExceptionsToClients = true;
         }
         /// <summary>
@@ -23,7 +25,7 @@ namespace AbpWebApi
         /// </summary>
         public override void Initialize()
         {
-            IocManager.RegisterAssemblyByConvention(typeof(AbpWebApiModule).Assembly);
+            IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
         }
     }
 }

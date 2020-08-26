@@ -2,14 +2,23 @@
 using Abp.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-
+using Abp.Dependency;
+using Abp.Domain.Repositories;
+using DBAccess.Service;
+using Abp.Domain.Uow;
+using App.DBHelper;
 #nullable disable
 
 namespace DBAccess.Models
 {
+    [AutoRepositoryTypes(
+        typeof(IRepository<>),
+        typeof(IRepository<,>),
+        typeof(BaseService<>),
+        typeof(BaseService<,>)
+        )]
     public partial class CoreDB : AbpDbContext
     {
-
         public CoreDB(DbContextOptions<CoreDB> options)
             : base(options)
         {
