@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace App.DBModel.Service
 {
-    public class BaseService<T> where T : class, new()
+    public class BaseService<T> : IBaseService<T> where T : class, new()
     {
         protected IUnitOfWork uow;
         protected IBaseRepository<T> _repository;
@@ -224,7 +224,7 @@ namespace App.DBModel.Service
         /// <returns></returns>
         public virtual async Task<int> UpdateEntitiesAsync(Expression<Func<T, bool>> where, Action<T> action)
         {
-             _repository.UpdateEntities(where, action);
+            _repository.UpdateEntities(where, action);
             return await uow.SaveChangesAsync();
         }
 
@@ -253,16 +253,6 @@ namespace App.DBModel.Service
         }
         #endregion
 
-        /// <summary>
-        /// 事务执行
-        /// </summary>
-        /// <param name="func"></param>
-        /// <param name="msg"></param>
-        /// <returns></returns>
-        public virtual bool ExcuteByTran(Func<T> func, out string msg)
-        {
-            return _repository.ExcuteByTran(func,out msg);
-        }
 
     }
 }

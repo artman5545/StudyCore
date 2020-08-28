@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace App.BaseHelper
 {
-    public interface IBaseRepository<T> where T : class, new()
+    public interface IBaseRepository<T> : IDisposable where T : class, new()
     {
 
         #region add
@@ -154,13 +154,5 @@ namespace App.BaseHelper
         int ExecuteSqlCommand(string sql, params object[] objectparams);
 
         #endregion
-
-        /// <summary>
-        /// 事务执行
-        /// </summary>
-        /// <param name="func"></param>
-        /// <param name="msg"></param>
-        /// <returns></returns>
-        bool ExcuteByTran(Func<T> func, out string msg);
     }
 }

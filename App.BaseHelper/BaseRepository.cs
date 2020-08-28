@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace App.BaseHelper
 {
-    public class BaseRepository<T> where T : class, new()
+    public class BaseRepository<T> : IBaseRepository<T>, IDisposable where T : class, new()
     {
-        private readonly DbContext _dbContext;
+        private readonly IDbContext _dbContext;
 
-        public BaseRepository(DbContext myDbContext)
+        public BaseRepository(IDbContext myDbContext)
         {
             this._dbContext = myDbContext;
         }
@@ -25,9 +25,7 @@ namespace App.BaseHelper
         /// <returns></returns>
         public virtual T AddEntity(T t)
         {
-            T entity = _dbContext.Set<T>().Add(t).Entity;
-            _dbContext.SaveChanges();
-            return entity;
+            return _dbContext.Set<T>().Add(t).Entity;
         }
         /// <summary>
         /// 
@@ -87,8 +85,10 @@ namespace App.BaseHelper
         /// <returns></returns>
         public virtual void DeleteByWhere(Expression<Func<T, bool>> where)
         {
-            IQueryable<T> list = LoadEntities(where);
-            _dbContext.RemoveRange(list);
+            LoadEntities(where).ForEachAsync(t =>
+            {
+                _dbContext.Entry(t).State = EntityState.Deleted;
+            });
         }
 
         #endregion
@@ -228,30 +228,9 @@ namespace App.BaseHelper
 
         #endregion
 
-        /// <summary>
-        /// 事务执行
-        /// </summary>
-        /// <param name="func"></param>
-        /// <param name="msg"></param>
-        /// <returns></returns>
-        public virtual bool ExcuteByTran(Func<T> func, out string msg)
+        public void Dispose()
         {
-            msg = string.Empty;
-            using (var transaction = _dbContext.Database.BeginTransaction())
-            {
-                try
-                {
-                    func();
-                    transaction.Commit();
-                    return true;
-                }
-                catch (Exception e)
-                {
-                    msg = e.Message;
-                    transaction.Rollback();
-                    return false;
-                }
-            }
+            _dbContext.Dispose();
         }
     }
 }

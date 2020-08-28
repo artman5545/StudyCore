@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace App.BaseHelper
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
-        DbContext GetDbContext();
+        IDbContext GetDbContext();
 
         Task<int> SaveChangesAsync();
 
@@ -17,14 +17,14 @@ namespace App.BaseHelper
 
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly DbContext myDbContext;
+        private readonly IDbContext myDbContext;
 
-        public UnitOfWork(DbContext myDbContext)
+        public UnitOfWork(IDbContext myDbContext)
         {
             this.myDbContext = myDbContext;
         }
 
-        public DbContext GetDbContext()
+        public IDbContext GetDbContext()
         {
             return myDbContext;
         }
@@ -37,6 +37,15 @@ namespace App.BaseHelper
         public int SaveChanges()
         {
             return myDbContext.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            if (myDbContext != null)
+            {
+                myDbContext.Dispose();
+            }
+            GC.SuppressFinalize(this);
         }
     }
 }

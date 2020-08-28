@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
+using App.BaseHelper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace App.DBModel.Models
 {
-    public partial class WorkDBContext : DbContext
+    public partial class WorkDBContext : DbContext, IDbContext
     {
         public WorkDBContext()
         {
@@ -33,6 +35,11 @@ namespace App.DBModel.Models
         public virtual DbSet<UserUsedCount> UserUsedCount { get; set; }
         public virtual DbSet<Work> Work { get; set; }
         public virtual DbSet<WorkVote> WorkVote { get; set; }
+
+        public Task<int> SaveChangesAsync()
+        {
+            return SaveChangesAsync();
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -531,6 +538,7 @@ namespace App.DBModel.Models
 
             OnModelCreatingPartial(modelBuilder);
         }
+
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }

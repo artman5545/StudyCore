@@ -177,13 +177,5 @@ namespace App.DBModel.Service
         /// <returns></returns>
         int ExecuteSqlCommand(string sql, params object[] objectparams);
         #endregion
-
-        /// <summary>
-        /// 事务执行
-        /// </summary>
-        /// <param name="func"></param>
-        /// <param name="msg"></param>
-        /// <returns></returns>
-        bool ExcuteByTran(Func<T> func, out string msg);
     }
 }

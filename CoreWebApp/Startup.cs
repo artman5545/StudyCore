@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace CoreWebApp
 {
@@ -48,14 +50,15 @@ namespace CoreWebApp
         }
         public void ConfigureContainer(ContainerBuilder builder)
         {
-
-            builder.RegisterAssemblyTypes(typeof(IBaseRepository<>).Assembly)
-                   .AsImplementedInterfaces()
-                   .InstancePerDependency();
-
-            builder.RegisterAssemblyTypes(typeof(IBaseService<>).Assembly)
+            
+            builder.RegisterAssemblyTypes(typeof(IBaseRepository<>).Assembly,typeof(IBaseService<>).Assembly)
                       .AsImplementedInterfaces()
                       .InstancePerDependency();
+            //builder.RegisterAssemblyTypes()
+            //    .Where(e=>e.Name.EndsWith("Service",StringComparison.OrdinalIgnoreCase))
+            //          .AsImplementedInterfaces()
+            //          .InstancePerDependency();
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(e => typeof(ControllerBase).IsAssignableFrom(e) && e.Name.EndsWith("Controller")).PropertiesAutowired();
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
